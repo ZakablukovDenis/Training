@@ -13,17 +13,14 @@ yandex_headers = {
 
 
 def upload_file():
-    url_foto = "https://sun9-58.userapi.com/impg/7kTKVyUlcJWSL-UE0Hgd85j2CNTYxdM0SP3mTA/-wY2v5WJF9g.jpg" \
-               "?size=857x857" \
-               "&quality=96" \
-               "&sign=c539f984af98470e96e1dcbe993ea191" \
-               "&c_uniq_tag=QulYHZXoeehTDTKc5mcCE1vZyvXGYK08UU3DjJIXyB0" \
-               "&type=album"
+    url_foto = 'https://sun9-26.userapi.com/impg/TxEGuOepxRDkWhCrl2q6DyWsYb1SUTe6U0TnMg/JXNhJfWH-aw.jpg' \
+               '?size=510x765' \
+               '&quality=95' \
+               '&sign=d33bbe431841f45147038521e419cf7d' \
+               '&c_uniq_tag=JqAFRUie2ORX8uOwdg8TNbFJnXfecJ05ljmXM79Vymk' \
+               '&type=album'
 
-    info = requests.post(f"{yandex_url}/upload",
-                         data={"path": "Test_code", "url": f"{url_foto}"},
-                         headers=yandex_headers)
-
+    info = requests.post(f"{yandex_url}/upload?path=Test_name&url={url_foto}", headers=yandex_headers)
     print(info.status_code)
     pprint(info.json())
 
