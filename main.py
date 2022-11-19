@@ -1,6 +1,8 @@
 # import time
+
 import requests
 from pprint import pprint
+
 # vk_id = input("Введите ID: ")
 vk_id = 210700286
 with open('ya_token.txt', 'r') as file:
