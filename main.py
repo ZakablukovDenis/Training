@@ -53,5 +53,6 @@ def create_directory():
 
 
 if __name__ == '__main__':
+
     link_photo()
     upload_file()
