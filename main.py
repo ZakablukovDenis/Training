@@ -1,10 +1,9 @@
 # import time
-
 import requests
 from pprint import pprint
-
 # vk_id = input("Введите ID: ")
 vk_id = 210700286
+
 with open('ya_token.txt', 'r') as file:
     yandex_token = file.read().strip()
 yandex_url = "https://cloud-api.yandex.net/v1/disk/resources"
