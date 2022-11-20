@@ -14,17 +14,11 @@ yandex_headers = {
     'Authorization': f'OAuth {yandex_token}'}
 
 
-def upload_file():
-    url_foto = 'https://sun9-26.userapi.com/impg/TxEGuOepxRDkWhCrl2q6DyWsYb1SUTe6U0TnMg/JXNhJfWH-aw.jpg' \
-               '?size=510x765' \
-               '&quality=95' \
-               '&sign=d33bbe431841f45147038521e419cf7d' \
-               '&c_uniq_tag=JqAFRUie2ORX8uOwdg8TNbFJnXfecJ05ljmXM79Vymk' \
-               '&type=album'
-
-    info = requests.post(f"{yandex_url}/upload?path=Test_name&url={url_foto}", headers=yandex_headers)
+def upload_file(url, name):
+    params = {'path': name, 'url': url}
+    info = requests.post(f"{yandex_url}/upload", params=params, headers=yandex_headers)
     print(info.status_code)
-    pprint(info.json())
+    # pprint(info.json())
 
 
 def link_photo():
@@ -33,14 +27,13 @@ def link_photo():
     vk_url = 'https://api.vk.com/method/photos.get'
     params = {'owner_id': vk_id, 'album_id': 'profile', 'extended': 1, 'access_token': vk_token, 'v': '5.131'}
     res = requests.get(vk_url, params=params)
-    print(res.status_code)
+    print(f"STATUS CODE: {res.status_code}")
     # pprint(res.json())
     for val in res.json().values():
         for i in val['items']:
-            file_name = i['likes']['count']
+            file_name = str(i['likes']['count']) + ".jpg"
             photo_url = i['sizes'][-1]['url']
-            print(file_name)
-            print(photo_url)
+            upload_file(photo_url, f"{vk_id}/{file_name}")
 
 
 def create_directory():
@@ -54,6 +47,5 @@ def create_directory():
 
 
 if __name__ == '__main__':
-
+    # create_directory()
     link_photo()
-    upload_file()
