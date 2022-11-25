@@ -1,6 +1,6 @@
 import time
 import requests
-from pprint import pprint
+# from pprint import pprint
 from tqdm import tqdm
 
 # vk_id = input("Введите ID: ")
@@ -21,9 +21,9 @@ yandex_headers = {
 
 
 def upload_file(url, name):
-    params = {'path': name, 'url': url}
-    info = requests.post(f"{yandex_url}/upload", params=params, headers=yandex_headers)
-    # print(info.status_code)
+    params_info = {'path': name, 'url': url}
+    info = requests.post(f"{yandex_url}/upload", params=params_info, headers=yandex_headers)
+    print(info.status_code)
     # if info.status_code == 202:
     #     print(f"Photo {name} saved")
     # else:
@@ -36,7 +36,7 @@ def link_photo():
     print("Получаем URL на объекты")
     for val in foto.json().values():
         for i in tqdm(val['items']):
-            time.sleep(2)
+            time.sleep(1)
             file_name = str(i['likes']['count']) + ".jpg"
             photo_url = i['sizes'][-1]['url']
             upload_file(photo_url, f"{vk_id}/{file_name}")
@@ -44,7 +44,6 @@ def link_photo():
 
 def create_directory(name_dir):
     rez = requests.put(f'{yandex_url}?path={name_dir}', headers=yandex_headers)
-    # print(rez.status_code)
     if rez.status_code == 201:
         print(f"Каталог '{name_dir}' создан")
     else:
