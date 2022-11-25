@@ -9,7 +9,12 @@ vk_id = 210700286
 with open('token.txt', 'r') as file_object:
     vk_token = file_object.read().strip()
 vk_url = 'https://api.vk.com/method/photos.get'
-params = {'owner_id': vk_id, 'album_id': 'profile', 'extended': 1, 'access_token': vk_token, 'v': '5.131'}
+params = {
+    'owner_id': vk_id,
+    'album_id': 'profile',
+    'extended': 1,
+    'access_token': vk_token, 'v': '5.131'
+}
 
 with open('ya_token.txt', 'r') as file:
     yandex_token = file.read().strip()
@@ -17,12 +22,18 @@ yandex_url = "https://cloud-api.yandex.net/v1/disk/resources"
 yandex_headers = {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
-    'Authorization': f'OAuth {yandex_token}'}
+    'Authorization': f'OAuth {yandex_token}'
+}
 
 
 def upload_file(url, name):
-    params_info = {'path': name, 'url': url}
-    info = requests.post(f"{yandex_url}/upload", params=params_info, headers=yandex_headers)
+    params_info = {
+        'path': name,
+        'url': url
+    }
+    info = requests.post(f"{yandex_url}/upload",
+                         params=params_info,
+                         headers=yandex_headers)
     print(info.status_code)
     # if info.status_code == 202:
     #     print(f"Photo {name} saved")
